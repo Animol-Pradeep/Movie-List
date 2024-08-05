@@ -8,5 +8,5 @@
 import Foundation
 
 protocol MovieDetails{
-    func getMovies()async -> Movies?
+    func getMovies()async -> [MovieData]
 }

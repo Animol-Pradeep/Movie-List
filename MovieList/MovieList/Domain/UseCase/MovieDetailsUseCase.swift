@@ -7,17 +7,6 @@
 
 import Foundation
 
-struct MovieDetailsUseCase: MovieDetails {
-    
-    var movieRepositoryImplementation: MovieDetails
-    
-    func getMovies() async -> Movies? {
-        let movies = await movieRepositoryImplementation.getMovies()
-        return movies
-    }
-    
-    
-    
-    
-    
+protocol MovieDetailsUseCase{
+    func getMovies()async -> [MovieData]
 }

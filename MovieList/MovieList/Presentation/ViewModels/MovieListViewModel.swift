@@ -7,11 +7,12 @@
 
 import Foundation
 
+@MainActor
 class MovieListViewModel: ObservableObject {
     
     var useCase: MovieDetailsUseCase
     
-    @Published var movies: [MovieResults] = []
+    @Published var movies: [MovieData] = []
     
     init(useCase: MovieDetailsUseCase){
         self.useCase = useCase
@@ -21,8 +22,7 @@ class MovieListViewModel: ObservableObject {
     func fetchMovies(){
         Task {
             var movieResponse = await useCase.getMovies()
-            guard let movieResult = movieResponse else{ return }
-            self.movies = movieResult.results
+            self.movies = movieResponse
         }
     }
 }

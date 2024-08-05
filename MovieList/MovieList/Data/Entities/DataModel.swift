@@ -1,8 +1,8 @@
 //
-//  Movie.swift
+//  DataModel.swift
 //  MovieList
 //
-//  Created by Animol on 10/07/24.
+//  Created by Animol on 05/08/24.
 //
 
 import Foundation
