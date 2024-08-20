@@ -23,7 +23,9 @@ struct ContentView: View {
     }
     
     var body: some View {
-        MovieListView(viewModel: self.movieListViewModel)
+        NavigationStack {
+            MovieListView(viewModel: self.movieListViewModel)
+        }
     }
 }
 

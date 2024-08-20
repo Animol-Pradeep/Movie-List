@@ -34,4 +34,33 @@ struct MovieAPI {
         
         return nil
     }
+    
+    func fetchMovieDetails(id: Int) async -> MovieDetail?{
+        
+        let url = URL(string: "https://api.themoviedb.org/3/movie/\(id)")!
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+        let queryItems: [URLQueryItem] = [
+          URLQueryItem(name: "language", value: "en-US"),
+        ]
+        components.queryItems = components.queryItems.map { $0 + queryItems } ?? queryItems
+
+        var request = URLRequest(url: components.url!)
+        request.httpMethod = "GET"
+        request.timeoutInterval = 10
+        request.allHTTPHeaderFields = [
+          "accept": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNTU3NzkyNTk5NmM1MGMyZTFkMTFhNDRjYzJhNmY0MSIsIm5iZiI6MTcyMjg1NTg2MS4yNTA0OTEsInN1YiI6IjY2ODY4M2FlYzJjY2Y5Nzg0ZjI1OTg4YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SXbO3uky6lisH-JCPEZTaOaXMKoX2lWZn5T6P4mjqmM"
+        ]
+
+        do{
+            let (data, _) = try await URLSession.shared.data(for: request)
+            let result = try JSONDecoder().decode(MovieDetail.self, from: data)
+            return result
+        }catch{
+            print("error")
+        }
+        
+        return nil
+    }
+    
 }

@@ -13,9 +13,13 @@ class MovieListViewModel: ObservableObject {
     var useCase: MovieDetailsUseCase
     
     @Published var movies: [MovieData] = []
+    @Published var toDetailsScreen: Bool = false
+    
+    var detailViewModel: MovieDetailViewModel
     
     init(useCase: MovieDetailsUseCase){
         self.useCase = useCase
+        self.detailViewModel = MovieDetailViewModel(movieId: 0, useCase: useCase)
     }
     
     //API call
@@ -24,5 +28,10 @@ class MovieListViewModel: ObservableObject {
             var movieResponse = await useCase.getMovies()
             self.movies = movieResponse
         }
+    }
+    
+    func moveToDetailsScreen(movieId: Int){
+        detailViewModel = MovieDetailViewModel(movieId: movieId, useCase: useCase)
+        toDetailsScreen.toggle() // toDetailsScreen = true
     }
 }

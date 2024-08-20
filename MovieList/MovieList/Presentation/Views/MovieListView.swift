@@ -16,12 +16,11 @@ struct MovieListView: View {
     var body: some View {
         ZStack {
             Color.gray
-                //LazyVGrid(columns: colums) {
                 ScrollView {
                     VStack {
                         ForEach(viewModel.movies, id: \.self){ movie in
                             Button(action: {
-                                
+                                viewModel.moveToDetailsScreen(movieId: movie.id)
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -44,7 +43,6 @@ struct MovieListView: View {
                         }
                     }
                     .background(.clear)
-                    //}
                 }
                 .onAppear{
                     viewModel.fetchMovies()
@@ -53,6 +51,9 @@ struct MovieListView: View {
                 
         }
         .ignoresSafeArea(edges: .bottom)
+        .navigationDestination(isPresented: $viewModel.toDetailsScreen) {
+            MovieDetailView(detailViewModel: viewModel.detailViewModel)
+        }
     }
 }
 

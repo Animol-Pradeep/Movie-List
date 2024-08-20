@@ -28,6 +28,19 @@ struct MovieRepositoryImplementation: MovieDetails {
         return movieDatas
     }
     
+    func getMovieDetails(id: Int) async -> MovieDetailsDisplay {
+        var movieDetalis = await dataSource.fetchMovieDetails(id: id)
+        var movieDetailDisplay = movieDataToPresentation(movieDetail: movieDetalis)
+        return movieDetailDisplay
+    }
+    
+    func movieDataToPresentation(movieDetail: MovieDetail?) -> MovieDetailsDisplay{
+        var movieDetails = MovieDetailsDisplay(id: 0, posterPath: "", title: "", overview: "", releaseDate: "")
+        guard let movieDetail = movieDetail else { return movieDetails}
+        movieDetails = MovieDetailsDisplay(id: movieDetail.id, posterPath: movieDetail.posterPath, title: movieDetail.title, overview: movieDetail.overview, releaseDate: movieDetail.releaseDate)
+        return movieDetails
+    }
+    
     
     
     

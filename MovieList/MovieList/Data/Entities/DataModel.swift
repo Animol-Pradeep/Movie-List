@@ -23,3 +23,19 @@ struct MovieResults: Codable, Hashable{
         case title
     }
 }
+
+struct MovieDetail: Codable{
+    let id: Int
+    let posterPath: String
+    let title: String
+    let overview: String
+    let releaseDate: String
+    
+    enum CodingKeys: String, CodingKey{
+        case id
+        case posterPath = "poster_path"
+        case title = "original_title"
+        case overview
+        case releaseDate = "release_date"
+    }
+}

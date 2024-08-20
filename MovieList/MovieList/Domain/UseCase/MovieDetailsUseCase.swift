@@ -9,4 +9,5 @@ import Foundation
 
 protocol MovieDetailsUseCase{
     func getMovies()async -> [MovieData]
+    func getMovieDetails(id: Int)async -> MovieDetailsDisplay
 }
