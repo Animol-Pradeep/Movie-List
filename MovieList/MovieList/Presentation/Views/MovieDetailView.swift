@@ -13,17 +13,31 @@ struct MovieDetailView: View {
         VStack {
             if let movieDetail = detailViewModel.movieDetails{
                 VStack{
-                    let url = URL(string: "https://image.tmdb.org/t/p/w185/\(movieDetail.posterPath)")
-                    AsyncImage(url: url) { Image in
-                        Image
-                    } placeholder: {
-                        Image(systemName: "waveform")
+                    ZStack {
+//                        Color("Bg")
+//                            .edgesIgnoringSafeArea(.all)
+                        VStack {
+                        let url = URL(string: "https://image.tmdb.org/t/p/w185/\(movieDetail.posterPath)")
+                        
+                            AsyncImage(url: url) { Image in
+                                Image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            } placeholder: {
+                                Image(systemName: "waveform")
+                            }
+                            VStack {
+                                Text(movieDetail.title)
+                                Rectangle()
+                                    .fill(.clear)
+                                    .frame(height: 2)
+                                HStack{
+                                    Text(movieDetail.overview)
+                                    
+                                }
+                            }
+                        }
                     }
-                    Text(movieDetail.title)
-                    Rectangle()
-                        .fill(.clear)
-                        .frame(height: 2)
-                    Text(movieDetail.overview)
                 }
             }else{
                 ProgressView()
