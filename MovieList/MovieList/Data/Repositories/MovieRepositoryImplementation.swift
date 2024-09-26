@@ -10,6 +10,7 @@ import Foundation
 struct MovieRepositoryImplementation: MovieDetails {
     
     var dataSource: MovieAPI
+    var dataPersistance: SwiftDataSource
     
     func getMovies() async -> [MovieData] {
         let movies = await dataSource.fetchMovieList()
@@ -41,7 +42,10 @@ struct MovieRepositoryImplementation: MovieDetails {
         return movieDetails
     }
     
-    
+    func insertFavorite(movie: MovieDetailsDisplay) {
+        let movieToSave = FavouriteMovie(id: movie.id, posterPath: movie.posterPath, title: movie.title, overview: movie.overview, releaseDate: movie.releaseDate)
+        dataPersistance.insertMovieFavorite(movie: movieToSave)
+    }
     
     
 }

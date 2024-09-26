@@ -12,6 +12,8 @@ class MovieDetailViewModel: ObservableObject{
     var useCase: MovieDetailsUseCase
     @Published var movieDetails: MovieDetailsDisplay?
     
+    @Published var isFavorite: Bool = false
+    
     init(movieId: Int, useCase: MovieDetailsUseCase) {
         self.movieId = movieId
         self.useCase = useCase

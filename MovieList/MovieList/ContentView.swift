@@ -17,7 +17,7 @@ struct ContentView: View {
     @MainActor
     init() {
         self.dataSource = MovieAPI() // n/w call
-        self.movieDetail = MovieRepositoryImplementation(dataSource: dataSource) // Repository implementation that fetch data from dataSource
+        self.movieDetail = MovieRepositoryImplementation(dataSource: dataSource, dataPersistance: SwiftDataSource()) // Repository implementation that fetch data from dataSource
         self.useCase = MovieDetailsUseCaseImplementation(movieRepositoryImplementation: movieDetail) // calls repository implementation
         self.movieListViewModel = MovieListViewModel(useCase: useCase) // Viewmodel for the view
     }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct MovieDetailsUseCaseImplementation: MovieDetailsUseCase {
+    
 
     var movieRepositoryImplementation: MovieDetails
     
@@ -20,5 +21,10 @@ struct MovieDetailsUseCaseImplementation: MovieDetailsUseCase {
         let movieDetail = await movieRepositoryImplementation.getMovieDetails(id: id)
         return movieDetail
     }
+    
+    func insertFavorite(_: MovieDetailsDisplay) {
+        
+    }
+    
     
 }

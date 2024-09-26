@@ -15,19 +15,21 @@ struct HomeTabView: View {
                 .tabItem {
                     Image(systemName: "house.fill")
                 }
-            Text("Wishlist")
+            FavoritesView()
                 .tabItem {
                     Image(systemName: "heart.fill")
                 }
         }
+        .tint(.red)
         .onAppear{
+            UITabBar.appearance().barTintColor = .gray
+            UITabBar.appearance().unselectedItemTintColor = .black
             UITabBar.appearance().backgroundColor = .gray
-            UITabBar.appearance().unselectedItemTintColor = .white
         }
         
     }
 }
 
 #Preview {
-    HomeTabView(viewModel: MovieListViewModel(useCase: MovieDetailsUseCaseImplementation(movieRepositoryImplementation: MovieRepositoryImplementation(dataSource: MovieAPI()))))
+    HomeTabView(viewModel: MovieListViewModel(useCase: MovieDetailsUseCaseImplementation(movieRepositoryImplementation: MovieRepositoryImplementation(dataSource: MovieAPI(), dataPersistance: SwiftDataSource()))))
 }

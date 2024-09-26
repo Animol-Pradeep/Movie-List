@@ -58,5 +58,5 @@ struct MovieListView: View {
 }
 
 #Preview {
-    MovieListView(viewModel: MovieListViewModel(useCase: MovieDetailsUseCaseImplementation(movieRepositoryImplementation: MovieRepositoryImplementation(dataSource: MovieAPI()))))
+    MovieListView(viewModel: MovieListViewModel(useCase: MovieDetailsUseCaseImplementation(movieRepositoryImplementation: MovieRepositoryImplementation(dataSource: MovieAPI(), dataPersistance: SwiftDataSource()))))
 }
